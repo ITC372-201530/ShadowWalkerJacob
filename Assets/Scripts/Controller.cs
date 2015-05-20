@@ -10,32 +10,40 @@ public class Controller : MonoBehaviour {
 	public bool isRestarting = false;
 	public Slider shadowBar;
 	public float shadowEnergy;
-	GameObject [] shadows;
+	public GameObject [] shadows;
 	public float pushPower = 10.0F;
 	public Canvas wintext;
 	public GameObject Sun;
 	public Vector3 restartPoint;
 	private static Controller instance;
+	public bool regen;
+	public AudioClip ShadowDrainSound;
+	public AudioClip HitSound;
+	public AudioSource Source;
 
-	void Start(){
-		restartPoint = this.transform.position;
+	void Start(){	
+		restartPoint = this.transform.position;	
 		if (instance == null) {
 			instance = this;
+			shadowEnergy = 100;
 			DontDestroyOnLoad(gameObject);
 		}
 		if (instance != this)
 			Destroy (gameObject);
+
+		Source = GetComponent<AudioSource>();
 	}
 
 	void Update() {
-		//shadowBar.value = shadowEnergy;
+		if(shadowBar != null)
+			shadowBar.value = shadowEnergy;		 	
 
 		shadows = GameObject.FindGameObjectsWithTag("Shadow");
 		CharacterController controller = GetComponent<CharacterController>();
-		
+
 		if (controller.isGrounded) {
 			moveDirection = transform.TransformDirection(Input.GetAxis("Horizontal"), 0, 0) * speed;
-			if (Input.GetKey(KeyCode.W))							
+			if (Input.GetAxis("Fire1") == 1)							
 				moveDirection.y = jumpSpeed * 2;
 		}	
 		else {
@@ -54,26 +62,42 @@ public class Controller : MonoBehaviour {
 		Vector3 temp = controller.transform.localPosition;
 		controller.Move(moveDirection * Time.deltaTime);
 
-		if(controller.transform.localPosition.y == temp.y) // Hit sound?
-			moveDirection.y = 0;
-
-
-		if(Input.GetKey(KeyCode.UpArrow)){
-			if (shadowEnergy > 0f)
-				foreach (GameObject sdw in shadows)				
-					sdw.collider.enabled = true;
-			if(shadowEnergy>0)
-				shadowEnergy -= 0.1f;			
+		if (controller.transform.localPosition.y == temp.y) {// Hit sound?
+			Source.clip = HitSound;
+			if(moveDirection.y >= 0)
+			{
+				if(!Source.isPlaying)
+					//Source.Play();						
+				moveDirection.y = 0;
+			}
 		}
 
-		if(Input.GetKeyUp(KeyCode.UpArrow))		
+		if(Input.GetKey(KeyCode.UpArrow)){
+			if (shadowEnergy > 0)
+				foreach (GameObject sdw in shadows)				
+					sdw.collider.enabled = true;
+			if(shadowEnergy>0){	
+				Source.clip = ShadowDrainSound;
+				if(!Source.isPlaying)
+					Source.Play();
+				shadowEnergy -= 0.1f;
+			}
+		}
+
+		if (Input.GetKeyUp (KeyCode.UpArrow)) {
 			foreach (GameObject sdw in shadows)			
 				sdw.collider.enabled = false;
+			regen = true;
+			Source.Stop();
+		}
 		
-		if(shadowEnergy <= 0f)		
+		if(shadowEnergy <= 0)		
 			foreach (GameObject sdw in shadows)			
 				sdw.collider.enabled = false;
-		shadowEnergy+= 0.01f;
+
+		if(regen && shadowEnergy<=100)
+			shadowEnergy+= 0.01f;
+
 	}
 
 	void OnTriggerEnter(Collider other){
@@ -85,7 +109,7 @@ public class Controller : MonoBehaviour {
 			wintext.enabled = true;
 
 		if (other.gameObject.tag == "checkPoint") // Checkpoint sound		
-			restartPoint = other.transform.position;
+			restartPoint = other.gameObject.transform.position;
 
 		if (other.gameObject.tag == "Hazard") // Death sound		
 			isRestarting = false;
@@ -105,6 +129,9 @@ public class Controller : MonoBehaviour {
 	 
 	void RestartLevel (){
 		Application.LoadLevel ("Level01Updated");
-		transform.position = new Vector3 (restartPoint.x, restartPoint.y, 0);
+		if(restartPoint.y > 1)
+			transform.position = new Vector3 (restartPoint.x, restartPoint.y, 0);
+		else
+			transform.position = new Vector3 (restartPoint.x, restartPoint.y + 1, 0);
 	}
 }
