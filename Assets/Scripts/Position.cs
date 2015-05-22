@@ -15,6 +15,6 @@ public class Position : MonoBehaviour {
 
 			sunPosition = GameObject.FindGameObjectWithTag ("Sun").transform.position;
 			parentPosition = transform.parent.position;
-			transform.position = new Vector3(0.0f, parentPosition.y -(sunPosition.y - parentPosition.y), parentPosition.z -(sunPosition.z - parentPosition.z));
+			transform.position = new Vector3(parentPosition.x -(sunPosition.x - parentPosition.x), parentPosition.y -(sunPosition.y - parentPosition.y),0);
 	}
 }

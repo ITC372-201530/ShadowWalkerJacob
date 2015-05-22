@@ -1,17 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &139046
+--- !u!1 &101426
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 439046}
-  - 33: {fileID: 3339046}
-  - 23: {fileID: 2339046}
-  - 114: {fileID: 11439046}
-  - 64: {fileID: 6439046}
+  - 4: {fileID: 401426}
+  - 33: {fileID: 3301426}
+  - 23: {fileID: 2301426}
+  - 114: {fileID: 11401426}
+  - 64: {fileID: 6401426}
   m_Layer: 0
   m_Name: Shadow Shard
   m_TagString: Collectable
@@ -19,24 +19,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &439046
+--- !u!4 &401426
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 139046}
+  m_GameObject: {fileID: 101426}
   m_LocalRotation: {x: -.173628807, y: -.0791272298, z: -.407074273, w: .893242657}
-  m_LocalPosition: {x: -19.8700008, y: 2.0999999, z: 0}
+  m_LocalPosition: {x: 35.0999985, y: 2.20000005, z: 0}
   m_LocalScale: {x: 3.99999976, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!23 &2339046
+--- !u!23 &2301426
 Renderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 139046}
+  m_GameObject: {fileID: 101426}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -51,19 +51,19 @@ Renderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &3339046
+--- !u!33 &3301426
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 139046}
+  m_GameObject: {fileID: 101426}
   m_Mesh: {fileID: 4300000, guid: d58a414f51f7e0e4baf7808b757e5449, type: 3}
---- !u!64 &6439046
+--- !u!64 &6401426
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 139046}
+  m_GameObject: {fileID: 101426}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
@@ -71,12 +71,12 @@ MeshCollider:
   m_SmoothSphereCollisions: 0
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: d58a414f51f7e0e4baf7808b757e5449, type: 3}
---- !u!114 &11439046
+--- !u!114 &11401426
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 139046}
+  m_GameObject: {fileID: 101426}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c4622a801813e44ca6734cec9948a73, type: 3}
@@ -92,6 +92,6 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 139046}
+  m_RootGameObject: {fileID: 101426}
   m_IsPrefabParent: 1
   m_IsExploded: 1
