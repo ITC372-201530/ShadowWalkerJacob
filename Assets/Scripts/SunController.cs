@@ -9,7 +9,7 @@ public class SunController : MonoBehaviour {
 
 	void Update() {
 		CharacterController controller = GetComponent<CharacterController>();
-		moveDirection = new Vector3(Input.GetAxis("Horizontal2"), Input.GetAxis("Horizontal2")/3* Time.deltaTime, 0);
+		moveDirection = new Vector3(Input.GetAxis("Horizontal2")*2, 0, 0);
 		moveDirection = transform.TransformDirection(moveDirection);
 		moveDirection *= speed;
 		moveDirection.y -= gravity * Time.deltaTime;

@@ -10,10 +10,14 @@ public class PlatformMovement : MonoBehaviour {
 	public string currentState;
 	public float smooth;
 	public float resetTime;
+	public AudioClip MovingSound;
+	public AudioSource Source;
 	
 	// Use this for initialization
 	void Start () {
 		changeTarget ();
+		Source = GetComponent<AudioSource>();
+		Source.clip = MovingSound;
 		
 	}
 	
@@ -24,6 +28,10 @@ public class PlatformMovement : MonoBehaviour {
 
 	void changeTarget ()
 	{
+		Source = GetComponent<AudioSource>();
+		if(!Source.isPlaying)
+			Source.Play();
+
 		if (currentState == "1")
 		{
 			currentState = "2";

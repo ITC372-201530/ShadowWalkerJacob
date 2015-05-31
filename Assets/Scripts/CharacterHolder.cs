@@ -3,14 +3,14 @@ using System.Collections;
 
 public class CharacterHolder : MonoBehaviour {
 
-	void OnTriggerEnter (Collider col)
-	{
-		if (col.transform.tag.Equals ("Player") || col.transform.tag.Equals ("Pushable"))
-		col.transform.parent = gameObject.transform;
+	void OnTriggerEnter (Collider other){
+		if (other.transform.tag.Equals ("Player"))
+			other.transform.parent = gameObject.transform;
+		else if (other.transform.tag.Equals ("Solid Object"))
+			this.renderer.enabled = false;
 	}
 
-	void OnTriggerExit (Collider col)
-	{
+	void OnTriggerExit (Collider col){
 		col.transform.parent = null;
 	}
 
