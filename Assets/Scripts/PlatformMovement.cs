@@ -8,7 +8,7 @@ public class PlatformMovement : MonoBehaviour {
 	public Transform position2;
 	public Vector3 newPosition;
 	public string currentState;
-	public float smooth;
+
 	public float resetTime;
 	public AudioClip MovingSound;
 	public AudioSource Source;
@@ -23,7 +23,7 @@ public class PlatformMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		movingPlatform.position = Vector3.Lerp (movingPlatform.position, newPosition, smooth * Time.deltaTime);
+		movingPlatform.position = Vector3.MoveTowards(movingPlatform.position, newPosition,Time.deltaTime*10) ;
 	}
 
 	void changeTarget ()
